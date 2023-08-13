@@ -12,11 +12,19 @@ app.use(express.json())
 
 console.log(process.env.DATABASE)
 console.log(process.env.ACCESSKEY)
-console.log(process.env.PASSKEY)
-console.log(process.env.ACCESS)
 
 app.post('/guest', async (req, res) => {
     console.log(req.body)
+    console.log(req.body.passkey)
+    if (req.body.passkey == process.env.ACCESSKEY) {
+        console.log("ACCESSKEY")
+    }
+    if (req.body.passkey == process.env.ACCESS) {
+        console.log("ACCESS")
+    }
+    if (req.body.passkey == process.env.PASSKEY) {
+        console.log("PASSKEY")
+    }
     try {
         const data_add = new data({
             name: req.body.name,
