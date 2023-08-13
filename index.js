@@ -10,16 +10,13 @@ app.listen(PORT, () => { console.log(`Connected At Port ${PORT}`) })
 app.use(cors({ origin: '*' }))
 app.use(express.json())
 
+console.log(process.env.DATABASE)
+console.log(process.env.ACCESSKEY)
+console.log(process.env.PASSKEY)
+console.log(process.env.ACCESS)
+
 app.post('/guest', async (req, res) => {
-    console.log(process.env.DATABASE)
     console.log(req.body)
-    if (req.body.passkey != "18bc8b13c1958ece155ba87ba131bb834cb2764982a034d682f328ee8cd2d00a") {
-        console.log("Not Matching")
-        console.log(typeof ("18bc8b13c1958ece155ba87ba131bb834cb2764982a034d682f328ee8cd2d00a"))
-        console.log(req.body.passkey)
-        console.log(typeof (req.body.passkey))
-    }
-    console.log(req.body.passkey == "18bc8b13c1958ece155ba87ba131bb834cb2764982a034d682f328ee8cd2d00a")
     try {
         const data_add = new data({
             name: req.body.name,
