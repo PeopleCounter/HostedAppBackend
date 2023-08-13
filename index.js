@@ -17,7 +17,6 @@ app.post('/guest', async (req, res) => {
                 name: req.body.name,
                 number: req.body.number,
             })
-            console.log(req.body)
             await data_add.save()
             const pincode_add = new pincode({
                 pincode: req.body.pincode
