@@ -14,8 +14,12 @@ app.post('/guest', async (req, res) => {
     try {
         const data_add = new data({
             name: req.body.name,
-            number: req.body.number
+            number: req.body.number,
+            key: req.body.key
         })
+        if (key != process.env.ACCESS_KEY) {
+            throw
+        }
         await data_add.save()
         const pincode_add = new pincode({
             pincode: req.body.pincode
