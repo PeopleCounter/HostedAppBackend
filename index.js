@@ -2,6 +2,7 @@ require('dotenv').config()
 require('./dbConnection')
 const { data } = require('./model/guestData')
 const { pincode } = require('./model/validOTP')
+const { guest } = require('./model/guestEntries')
 const cors = require('cors')
 const express = require('express')
 const app = express()
@@ -33,5 +34,20 @@ app.post('/guest', async (req, res) => {
     else {
         res.status(403).send()
     }
+})
 
+app.get('/log/getGuestUsers', async (req, res) => {
+    if (req.body.passkey == process.env.ACCESSKEY) {
+        try {
+            let result = await guest.find()
+            res.status(200).json(result)
+        }
+        catch (err) {
+            console.log(err)
+            res.status(500).send()
+        }
+    }
+    else {
+        res.status(403).send()
+    }
 })
